@@ -1,0 +1,51 @@
+"","id","text","high.low","impact.score","impact.rank","diff.score","diff.rank"
+"1","100","How can international food prices and distribution systems enable widespread food security without lowering food prices so much that they harm local and regional producers?","high","50.400426992142334",47,"5 50.5416784373398",11
+"2","105","Which import dependent countries are most vulnerable to climate shocks in major grain exporting countries?","low","50.60774690107282",3,"4 40.372014557412",92
+"3","108","What mitigative steps (e.g. NDCs, climate smart agriculture) will also help provide resilience against extreme events?","low","50.49839817413423",17,"4 40.3726495484844",90
+"4","117","How will geographies of pests change in the face of climate change?","high","50.643977226004427",2,"5 50.4409435431515",35
+"5","118","How do we establish complex agricultural ecosystems at the farm, watershed, and community levels, and what are the social barriers to this movement?","high","50.51826181618348",13,"5 50.4971055421639",18
+"6","12","Which on-farm practices increase resilience to drought, are cost effective and easily adopted?","low","50.596957355834826",4,"3 30.3661734987827",131
+"7","128","How can remote sensing technologies best contribute to reducing food insecurity and better understand increasing extreme events in data-scarce areas?","low","50.422445451819401",41,"3 30.368837299822",110
+"8","129","How resilient are different food system sectors to key perturbations? [Can they be stress tested?]","high","50.540887923510579",9,"5 50.8491658591831",2
+"9","13","What is the most effective way to deploy known interventions that reduce the effect of extreme events on food security (e.g., new seed varieties, new irrigation technologies) in order to increase adoption of these technologies?","high","50.431726238465942",38,"5 50.4186058037056",39
+"10","130","Could we establish a global network of smart farms with IoT to provide semi-continuous 'dynamic' data on farm level soil, water, air, crop changes (i.e., trends and shocks etc..), to build maps of resilience and risk for different production systems?","high","50.401155860178214",46,"5 50.6161230117211",6
+"11","131","What are the impacts of critical infrastructure failure on food security?","low","50.484453147511108",22,"4 40.3813246684486",69
+"12","14","What are the major barriers undermining the effective uptake of adaptation strategies and how can the limitations associated with these barriers addressed?","high","50.520949422066892",12,"5 50.5092358188822",16
+"13","140","What types of extreme events affect which types of farmers? [Can we generate exposure maps for different typologies of farmers by extreme event and identify who is most at risk and what types of adaptive capacity they need to bolster?]","low","50.424169738583852",40,"4 40.3822492341014",48
+"14","142","Which regions of intensive (rainfed) agriculture will likely be reliant on irrigation due to extreme reductions in precipitation in the near future?","low","50.394876179089019",50,"3 30.3625837400697",138
+"15","20","What are the major obstacles in developing resilience to extreme events in small scale farming systems?","high","50.469090021800791",28,"5 50.4286583340444",36
+"16","21","How does the loss of biodiversity make cropping systems more susceptible to extreme events?","low","50.583467703779176",7,"4 40.3820982668853",55
+"17","25","What are the key societal adaptations required to deal with synchronous crop failures?","high","50.448014535641054",34,"5 50.4154931554246",40
+"18","28","Is our international food trade system dynamic enough to accommodate synchronous disasters?","low","50.50284765215871",16,"4 40.3816711647665",62
+"19","29","Can we identify global hot spots of vulnerabaility in food-basket regions to extreme events?","low","50.414643741349987",42,"3 30.3680314478123",121
+"20","3","How can we assist food producers in their response to short-term (acute) extreme events (extreme rainfall, high-intensity storms, extreme temperature, storm surge, etc.)?","low","50.472840133191226",25,"3 30.3678584283096",125
+"21","38","What methods can best predict cascading impacts from extreme events across food systems?","high","50.459367378939674",31,"5 50.7170528077034",4
+"22","498","How can food production and supply chains be made robust to disruptions from extreme events affecting multiple regions, or the same region sequentially?","low","50.483698858694027",23,"4 40.3821392709747",54
+"23","50","What cost-effective management strategies can effectively decouple food production from food security so that variations in food production from shocks do not translate into differences in food accessibility? (doing this would involve building and testing more realistic models for international food trade, grain storage, and price responses to food production shocks.)","high","50.39567024256115",48,"5 50.4874489750607",21
+"24","502","How will extreme weather events erode the capacity of governments to take protection measures for citizens against food insecurity?","high","50.664211918323919",1,"5 50.4843640588522",22
+"25","503","Are there tipping points in the intensity of extreme events that will cause global food insufficiency?","high","50.405151294329073",44,"5 50.3835803345911",45
+"26","56","How much can increasing crop diversity improve smallholders’ adaptive capacity?","low","50.485314578070042",21,"4 40.358599324014",106
+"27","57","What are the effects of crop diversification on pest, drought, and disease resistance?","low","50.490097406702484",19,"4 40.382230965914",50
+"28","59","How does crop diversification at the household, community, and regional scales mediate food insecurity during climate events?","low","50.522171173792384",11,"4 40.3694338278772",96
+"29","6","What are the most effective approaches for enhancing adaptive capacities at local and regional levels?","high","50.546954340466649",8,"5 50.4239583723854",37
+"30","61","What is the effect of agroecological management of food systems on farmer vulnerability to extreme events?","low","50.410290262420379",43,"4 40.3702120408022",95
+"31","62","How can we use artificial intelligence to help predict extreme event probability and risk profiles, and explore range of possibilities of future extreme event occurrence?","low","50.469342366849795",27,"5 50.37947645893",47
+"32","63","To what extent can early warning systems identify people most exposed, vulnerable, and unable to adapt, to food insecurity in face of extreme events?","low","50.47834565685504",24,"3 30.3651320876854",135
+"33","64","Which features of early warning systems are essential for them to be effective?","low","50.497558427381602",18,"4 40.3806398206757",73
+"34","65","How accurate are food security forecasts, and do these forecasts become more accurate by incorporating climate and weather forecasts?","high","50.468404271429717",29,"5 50.4473995453149",32
+"35","67","Can we build accurate sub-seasonal models of precipitation in sub-Saharan Africa, and what can and cannot be said with current network of available observational data?","high","50.448926019960453",33,"5 50.4542478745837",30
+"36","7","What are some feasible policy (top down) or community (bottom up) pathways for different sectors to enhance the resilience of food security to extreme events?","high","50.395403333595208",49,"5 50.4430426741633",33
+"37","70","To what extent does early warning for high risk pests outbreaks for Africa improve food security on the ground?","low","50.586918915921699",5,"4 40.3819913093904",58
+"38","73","What factors or features (e.g. Atmosphere, ocean, land surface, and cryosphere) are best at predicting seasonal-scale extremes for key agricultural and populous regions around the globe ?","high","50.472536450386964",26,"5 50.5385579498593",12
+"39","74","Can we develop globally dynamic predictions of the stocks and flows of food?","high","50.586780960185442",6,"5 50.8445321498456",3
+"40","75","How can big data, artificial intelligence and machine learning best be used to improve early warning systems?","low","50.467106982037879",30,"4 40.3630101403887",101
+"41","77","How will flooding affect food production and food systems in developing countries in the future?","low","50.434688769607268",36,"4 40.3781305576971",79
+"42","79","What are policies that make farming systems less vulnerable to extreme events, without negatively affecting other sustainable development goals?","high","50.516853278218174",14,"5 50.5859717975282",9
+"43","8","What are the practical tools and policies for the worlds' poor within the scope of limited resources, institutions, infrastructure, capacity, to adapt to the extreme events and food insecurity in the near to medium term?","high","50.486303086980538",20,"5 50.4568299802291",28
+"44","80","What does governance for resilient food systems look like?","high","50.442257909537236",35,"5 50.4514024405275",31
+"45","84","How does insurance enhance or undermine food security in face of extreme events?","low","50.427339372089238",39,"4 40.3766260578542",81
+"46","85","How does land access affect rural vulnerability to extreme events, and what has been the effect, globally, of land reform efforts on food security and poverty in face of extreme events?","high","50.453140601238369",32,"5 50.4745896242412",23
+"47","9","How context dependent are on-farm resilience practices across the world, and are there common themes, interventions and technologies that work across multiple locations?","high","50.433868156712243",37,"5 50.4628020934186",27
+"48","90","What are the likely future impacts of extreme ocean conditions on coastal communities?","low","50.509223271317901",15,"3 30.3637585787301",137
+"49","92","How does the frequency and intensity of extreme events and their subsequent impact on global food security (from both land and sea) change under different climate change scenarios and Shared Socio-economic Pathways?","high","50.404305271674264",45,"5 50.5140055590982",13
+"50","98","How many individuals are exposed to extreme weather events through hazards which occur in domestic versus export partners production areas?","low","50.53361769270224",10,"4 40.3782931246342",78

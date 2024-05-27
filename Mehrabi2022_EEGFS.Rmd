@@ -1,0 +1,196 @@
+---
+title: "Mehrabi et al. 2022. Research priorities for global food security under extreme events. Supplementary data and code."
+author: "Zia Mehrabi"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+affiliation: University of Colorado Boulder
+email: zia.mehrabi@colorado.edu
+editor_options:
+  chunk_output_type: console
+chunk_output_type: console
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+urlcolor: blue
+bibliography: [R_packages.bib]
+---
+
+```{r setup, include=FALSE}
+require("knitr")
+knitr::opts_chunk$set(echo = TRUE,
+                      tidy.opts = list(width.cutoff=30),
+                      tidy = TRUE, 
+                      cache=TRUE)
+```
+
+```{r wrap-hook, include=FALSE}
+hook_output = knitr::knit_hooks$get('output')
+knitr::knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
+
+\pagebreak
+# Aims
+
+The aim of this document is to provide the scripts for reproducing the final results shown in Mehrabi et al., Research priorities for global food security under extreme events, One Earth (2022), https://doi.org/10.1016/j.oneear.2022.06.008. It provides a simple ranking exercise of expert elicited threats and research questions based on perceived priority responses collected through online surveys.  Please see the paper for detailed background for this study.You can contact Zia Mehrabi at the above email address if you have any questions, queries or corrections for this work.
+
+# Reproducibility
+
+We use the \textbf{R} packages \texttt{knitr} [@R-knitr] and \texttt{checkpoint} [@R-checkpoint]. The package \texttt{knitr} facilitates producing a dynamic document that contains all the steps required to analyze the data. \texttt{checkpoint()} will install all packages versions that we used in our analysis to avoid result discrepancies that may arise from software differences. Thus the reader is provided with all the code to fully reproduce the analysis, and adapt it for other analyses.
+
+```{r make_checkpoint, include=TRUE, echo=TRUE, message=FALSE, eval=FALSE}
+require("checkpoint")
+checkpoint(snapshotDate = "2022-07-01")
+```
+
+```{r create_package_bib, include=FALSE, echo=TRUE, message=FALSE}
+knitr::write_bib(c("ordinal","tidyverse", "knitr", "checkpoint"), "R_packages.bib")
+```
+
+For the analysis in this document we will be using the \texttt{tidyverse} [@R-tidyverse] and \texttt{ordinal} [@R-ordinal] packages.
+```{r load_pd ackages, message=FALSE, warning=FALSE}
+packages <- c("ordinal","tidyverse")
+invisible(lapply(packages, require, character.only = TRUE))
+```
+
+# Threats
+
+## Read data
+First we read in the data. We note that the data has been anonymized to remove personal identifying information of individual survey respondents (e.g. emails, names, IP addresses etc). We do not provide all upstream processing steps (which includes reading in raw data imported from the online survey instrument administered in Qualtrics) for this reason. 
+
+The input data dimensions characteristics and additional meta-data e.g. variable descriptors are shown below.
+
+```{r readthreats}
+threats<-read_rds("threatsin.rds")
+str(threats)
+```
+
+## Compute the ranks
+Next we compute both the modes and the probabilities of those modes for each question and response variable using hierarchical cumulative link models, conditioning on respondents which we treat as random effects.  We don't explicitly model correlations between impact and probability scores.
+
+```{r fitmod}
+tmp_mod <- clmm2(score ~ id.type, random=  respondent,
+              data = threats, Hess=T, nAGQ=1)
+```
+
+We save the results in a table where we extract the population level predictions, identify the mode, and concatenate both the mode and the probabilities.
+```{r getresults}
+threats$fitted<-predict(tmp_mod,  newdata=threats) #get pop effects
+
+ranks<-threats %>%
+  mutate(score=factor(score, ordered=F))%>%
+  group_by(id,type, score) %>%
+  summarize(fit=unique(fitted)) %>% 
+  ungroup() %>%
+  group_by(id, type)%>%
+  filter(fit ==max(fit))%>%
+  mutate(score.prob=as.numeric(paste(score, fit, sep=""))) %>%
+  ungroup()
+```
+
+We then compute the rankings for each response, make the data frame wide and compute the mean rank for each threat using ranks for each response. 
+```{r rank}
+ranks<-ranks %>% group_by(type)%>%
+  mutate(rank=(min_rank(desc(score.prob))))
+
+ranks.w<-ranks %>% 
+pivot_wider(., names_from = type,names_sep = ".",
+values_from = c(score, fit, score.prob, rank)) %>%
+unnest(cols = everything() )
+
+ranks.w$mean.rank<- ((ranks.w$rank.Impact+ ranks.w$rank.Probability)/2)
+```
+
+We add the text descriptions back in.
+```{r addtext}
+descript<-threats %>% select(id, title,threat) %>%
+distinct()
+
+out<-right_join(descript, ranks.w,by="id" )
+```
+
+## Save
+We then save the output as a csv. Note, some of the text in this file may differ from that in the final manuscript due iterative in-text editing of the paper. 
+```{r save}
+write.csv(out,"threatsout.csv")
+```
+
+\pagebreak
+
+# Research questions
+
+## Read data
+
+We first read in the data. As for the threats file, we see the characteristics of the data, and variable descriptions. 
+```{r readqs}
+questions<-read_rds("questionsin.rds")
+questions$expertise<-factor(questions$expertise, ordered=F)
+str(questions)
+```
+
+## Compute the ranks
+
+We then compute the ranks, here as we have self declared expertise levels for each expert, we condition the population estimates on those expertise levels, so results are comparable, regardless of expertise.
+
+```{r fitmodq}
+tmp_mod.q <- clmm2(score ~ id.type+ expertise, random=  respondent,
+              data = questions, Hess=T, nAGQ=1)
+```
+
+We then save the results to a table. We use the model above to predict the modes and probabilities of those models given maximum expertise for each question and response. And then find the ranks of questions along each response.
+```{r frequenrq}
+questions.exp0<-questions #create new data-frame.
+questions$expertise<-as.factor(5) #set expertise to be high for predictions
+questions$fitted<-predict(tmp_mod.q,  newdata=questions.exp0) #get pop effects at high expertise
+
+ranks.q<-questions%>%
+  group_by(id,text,type, score) %>%
+  summarize(fit=unique(fitted))  %>%
+  ungroup %>%
+  group_by(id, text,type)%>%
+  filter(fit ==max(fit))%>%
+  mutate(score.prob=paste(score, fit, sep="")) 
+
+ranks.q<-ranks.q %>% group_by(type)%>%
+  mutate(rank=(min_rank(desc(score.prob))))
+```
+
+## Low and high effort split
+
+Next we identify the top 50 questions in terms of perceived impact. We also split the questions into low vs high effort groups based on percentile split of the difficulty within the high impact questions.
+
+```{r highlow}
+i<-subset(ranks.q, type=="Impact" & rank<=50)
+d<-subset(ranks.q, id %in% i$id &type=="Difficulty")
+d$score.prob<-as.numeric(d$score.prob)
+d$high.low<-ifelse(d$score.prob >quantile(d$score.prob, probs=0.5),"high", "low" )
+d$diff.score<-paste(as.numeric(d$score),as.numeric(d$score.prob))
+d$impact.score<-i$score.prob
+d$impact.rank<-i$rank
+d$diff.rank<-d$rank
+```
+
+## Save
+Finally we save the output. Again, as for threats, some of the text in this file may differ from that in the final manuscript due to iterative in-text editing of the paper. 
+
+```{r saveq}
+out<-d %>%
+  ungroup() %>%
+  select(id, text, high.low, impact.score, impact.rank, diff.score,diff.rank)
+
+write.csv(out,"questionsout.csv")
+```
+
+
+\pagebreak
+
+# References
